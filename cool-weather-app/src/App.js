@@ -12,13 +12,14 @@ function App() {
   const fetchWeather = async (cityName) => {
     try {
       const weatherResponse = await fetchWeatherData(cityName);
-      setWeatherData(weatherResponse); // Set the weather data
-      setError(null); // Clear any previous errors
+      setWeatherData(weatherResponse); // Set weather data
+      setError(null); // Clear previous errors
     } catch (err) {
-      setError(err.message); // Handle the error
-      console.error(err); // Log the error for debugging
+      setError(err.message); // Capture error message
+      console.error(err);
     }
   };
+  
 
   return (
     <div className="mainAppBody">
