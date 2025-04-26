@@ -1,31 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-function SearchBar() {
+function SearchBar({ fetchWeather }) {  // Get the fetchWeather function as a prop
   
-    const [searchQuery, setSearchQuery] = useState("");
+  const [cityName, setCityName] = useState("");
 
-    const handleInputchange = (event) => {
-        setSearchQuery(event.target.value);
-    }
+  const handleInputchange = (event) => {
+    setCityName(event.target.value);
+  };
 
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-        console.log(searchQuery) //for debugging purposes of functionality testing
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+
+    // Prevent form submission if cityName is empty
+    if (!cityName.trim()) {
+      alert("Please enter a city name.");
+      return; // Exit if input is empty
     }
-  
-    return (
+    
+    // Call the fetchWeather function passed down as a prop
+    fetchWeather(cityName);  // Now fetchWeather is handled in App.js
+  };
+
+  return (
     <div>
       <input
         type="text"
         placeholder="Search a location..."
-        value={searchQuery}
+        value={cityName}
         onChange={handleInputchange}
       />
       <button type="submit" onClick={handleSearchSubmit}>Submit</button>
-      
-      
     </div>
-  )
+  );
 }
 
-export default SearchBar
+export default SearchBar;
